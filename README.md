@@ -29,4 +29,21 @@ text_file = open("WatsonSTTResult.txt", "w")
 text_file.write(r.text)
 text_file.close()
 ```
+### Code to Retrieve Transcript from File
+```
+f = open('WatsonSTTResult.txt', 'r')
 
+while True:
+  text = f.readline()
+  confidence = ''
+  transcript = ''
+  num = 0
+  if '"confidence": ' in text:
+    confidence = text[29:(len(text) - 3)]
+    num = float(confidence)
+    f.readline()
+    if (num > 0.85):
+      transcript = text[30:(len(text) - 3)]
+   elif f.readline() == '':
+		break
+```
